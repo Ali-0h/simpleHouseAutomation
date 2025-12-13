@@ -1,0 +1,111 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\HouseAutomationDFA\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6F3A0767-0725-4574-A2AB-8D9B468E4D5D}|HouseAutomationDFA\\HouseAutomationDFA.csproj|c:\\users\\acer\\desktop\\chatbot ai\\houseautomationdfa\\houseautomationdfa\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F3A0767-0725-4574-A2AB-8D9B468E4D5D}|HouseAutomationDFA\\HouseAutomationDFA.csproj|solutionrelative:houseautomationdfa\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F3A0767-0725-4574-A2AB-8D9B468E4D5D}|HouseAutomationDFA\\HouseAutomationDFA.csproj|C:\\Users\\ACER\\Desktop\\Chatbot Ai\\HouseAutomationDFA\\houseautomationdfa\\properties\\resources.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "RelativeMoniker": "D:0:0:{6F3A0767-0725-4574-A2AB-8D9B468E4D5D}|HouseAutomationDFA\\HouseAutomationDFA.csproj|solutionrelative:houseautomationdfa\\properties\\resources.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F3A0767-0725-4574-A2AB-8D9B468E4D5D}|HouseAutomationDFA\\HouseAutomationDFA.csproj|C:\\Users\\ACER\\Desktop\\Chatbot Ai\\HouseAutomationDFA\\houseautomationdfa\\dfa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F3A0767-0725-4574-A2AB-8D9B468E4D5D}|HouseAutomationDFA\\HouseAutomationDFA.csproj|solutionrelative:houseautomationdfa\\dfa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F3A0767-0725-4574-A2AB-8D9B468E4D5D}|HouseAutomationDFA\\HouseAutomationDFA.csproj|C:\\Users\\ACER\\Desktop\\Chatbot Ai\\HouseAutomationDFA\\houseautomationdfa\\dfavisualizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F3A0767-0725-4574-A2AB-8D9B468E4D5D}|HouseAutomationDFA\\HouseAutomationDFA.csproj|solutionrelative:houseautomationdfa\\dfavisualizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F3A0767-0725-4574-A2AB-8D9B468E4D5D}|HouseAutomationDFA\\HouseAutomationDFA.csproj|C:\\Users\\ACER\\Desktop\\Chatbot Ai\\HouseAutomationDFA\\houseautomationdfa\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F3A0767-0725-4574-A2AB-8D9B468E4D5D}|HouseAutomationDFA\\HouseAutomationDFA.csproj|solutionrelative:houseautomationdfa\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\HouseAutomationDFA\\HouseAutomationDFA\\MainForm.cs",
+              "RelativeDocumentMoniker": "HouseAutomationDFA\\MainForm.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\HouseAutomationDFA\\HouseAutomationDFA\\MainForm.cs",
+              "RelativeToolTip": "HouseAutomationDFA\\MainForm.cs",
+              "ViewState": "AgIAAOwBAAAAAAAAAAAcwCYBAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-12T10:03:40.159Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DfaVisualizer.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\HouseAutomationDFA\\HouseAutomationDFA\\DfaVisualizer.cs",
+              "RelativeDocumentMoniker": "HouseAutomationDFA\\DfaVisualizer.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\HouseAutomationDFA\\HouseAutomationDFA\\DfaVisualizer.cs",
+              "RelativeToolTip": "HouseAutomationDFA\\DfaVisualizer.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAkwEUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-12T21:55:54.07Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DFA.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\HouseAutomationDFA\\HouseAutomationDFA\\DFA.cs",
+              "RelativeDocumentMoniker": "HouseAutomationDFA\\DFA.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\HouseAutomationDFA\\HouseAutomationDFA\\DFA.cs",
+              "RelativeToolTip": "HouseAutomationDFA\\DFA.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-12T21:55:27.012Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\HouseAutomationDFA\\HouseAutomationDFA\\Program.cs",
+              "RelativeDocumentMoniker": "HouseAutomationDFA\\Program.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\HouseAutomationDFA\\HouseAutomationDFA\\Program.cs",
+              "RelativeToolTip": "HouseAutomationDFA\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-12T10:02:12.288Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Resources.resx",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\HouseAutomationDFA\\HouseAutomationDFA\\Properties\\Resources.resx",
+              "RelativeDocumentMoniker": "HouseAutomationDFA\\Properties\\Resources.resx",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\HouseAutomationDFA\\HouseAutomationDFA\\Properties\\Resources.resx",
+              "RelativeToolTip": "HouseAutomationDFA\\Properties\\Resources.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-12-12T10:00:34.025Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

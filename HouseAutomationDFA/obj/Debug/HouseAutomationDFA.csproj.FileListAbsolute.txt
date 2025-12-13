@@ -1,0 +1,10 @@
+C:\Users\ACER\Desktop\Chatbot Ai\HouseAutomationDFA\HouseAutomationDFA\obj\Debug\HouseAutomationDFA.csproj.AssemblyReference.cache
+C:\Users\ACER\Desktop\Chatbot Ai\HouseAutomationDFA\HouseAutomationDFA\obj\Debug\HouseAutomationDFA.Properties.Resources.resources
+C:\Users\ACER\Desktop\Chatbot Ai\HouseAutomationDFA\HouseAutomationDFA\obj\Debug\HouseAutomationDFA.csproj.GenerateResource.cache
+C:\Users\ACER\Desktop\Chatbot Ai\HouseAutomationDFA\HouseAutomationDFA\obj\Debug\HouseAutomationDFA.csproj.CoreCompileInputs.cache
+C:\Users\ACER\Desktop\Chatbot Ai\HouseAutomationDFA\HouseAutomationDFA\bin\Debug\HouseAutomationDFA.exe.config
+C:\Users\ACER\Desktop\Chatbot Ai\HouseAutomationDFA\HouseAutomationDFA\bin\Debug\HouseAutomationDFA.exe
+C:\Users\ACER\Desktop\Chatbot Ai\HouseAutomationDFA\HouseAutomationDFA\bin\Debug\HouseAutomationDFA.pdb
+C:\Users\ACER\Desktop\Chatbot Ai\HouseAutomationDFA\HouseAutomationDFA\obj\Debug\HouseAutomationDFA.exe
+C:\Users\ACER\Desktop\Chatbot Ai\HouseAutomationDFA\HouseAutomationDFA\obj\Debug\HouseAutomationDFA.pdb
+C:\Users\ACER\Desktop\Chatbot Ai\HouseAutomationDFA\HouseAutomationDFA\obj\Debug\HouseAutomationDFA.exe.config
