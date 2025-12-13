@@ -50,11 +50,10 @@
     <Compile Include="DfaVisualizer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="MainForm.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="MainForm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
