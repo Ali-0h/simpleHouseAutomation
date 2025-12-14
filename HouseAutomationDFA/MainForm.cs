@@ -34,8 +34,12 @@ namespace HouseAutomationDFA
         public int RemainingSeconds { get; private set; } = 0;
 
         private int tempAdjustCountdown = 0;
+
         public event Action StateChanged;
 
+        // -----------------------
+        // LIGHT
+        // -----------------------
         public void ToggleLight()
         {
             LightOn = !LightOn;
@@ -43,6 +47,9 @@ namespace HouseAutomationDFA
             StateChanged?.Invoke();
         }
 
+        // -----------------------
+        // TEMPERATURE
+        // -----------------------
         public void IncreaseTemp()
         {
             Temperature++;
@@ -57,11 +64,21 @@ namespace HouseAutomationDFA
 
         private void EnterTempAdjust()
         {
+            // 🚨 DO NOT interrupt TimerRunning
+            if (CurrentState == DFAState.TimerRunning)
+            {
+                StateChanged?.Invoke();
+                return;
+            }
+
             CurrentState = DFAState.TempAdjust;
             tempAdjustCountdown = 3;
             StateChanged?.Invoke();
         }
 
+        // -----------------------
+        // TIMER
+        // -----------------------
         public void SetTimer(int seconds)
         {
             RemainingSeconds = seconds;
@@ -73,6 +90,9 @@ namespace HouseAutomationDFA
         {
             if (CurrentState == DFAState.TimerSet)
             {
+                // ✅ FIX #1: Timer turns the light ON
+                LightOn = true;
+
                 CurrentState = DFAState.TimerRunning;
                 StateChanged?.Invoke();
             }
@@ -98,7 +118,6 @@ namespace HouseAutomationDFA
                     }
                     else
                     {
-                        CurrentState = DFAState.TimerExpired;
                         OnTimerExpired();
                     }
                     StateChanged?.Invoke();
@@ -113,11 +132,13 @@ namespace HouseAutomationDFA
 
         private void OnTimerExpired()
         {
+            // ✅ FIX #2: Timer controls light lifecycle
             LightOn = false;
             CurrentState = DFAState.TimerExpired;
             StateChanged?.Invoke();
         }
     }
+
 
     // Main form — full UI and integration
     public class MainForm : Form
@@ -151,7 +172,7 @@ namespace HouseAutomationDFA
         {
             Text = "House Automation - DFA";
             BackColor = Color.FromArgb(30, 30, 30);
-            ClientSize = new Size(1180, 720);
+            ClientSize = new Size(1000, 720);
             Font = new Font("Segoe UI", 9f);
 
             InitializeUI();
@@ -201,9 +222,9 @@ namespace HouseAutomationDFA
             panelSide = new Panel
             {
                 Dock = DockStyle.Left,
-                Width = 240,
+                Width = 200,
                 BackColor = Color.FromArgb(38, 38, 38),
-                Padding = new Padding(12)
+                Padding = new Padding(1)
             };
             Controls.Add(panelSide);
 
@@ -301,7 +322,7 @@ namespace HouseAutomationDFA
             var rightColumn = new Panel
             {
                 Dock = DockStyle.Right,
-                Width = 360,
+                Width = 400,
                 BackColor = Color.FromArgb(36, 36, 36),
                 Padding = new Padding(10)
             };
@@ -317,26 +338,29 @@ namespace HouseAutomationDFA
             };
             rightColumn.Controls.Add(panelDfaContainer);
 
-            // header label inside DFA
-            var lblDfaHeader = new Label
-            {
-                Text = "DFA Visualizer (Real-time)",
-                Dock = DockStyle.Top,
-                Height = 22,
-                ForeColor = Color.FromArgb(0, 174, 239),
-                Font = new Font("Segoe UI", 10f, FontStyle.Bold)
-            };
-            panelDfaContainer.Controls.Add(lblDfaHeader);
-
-            // logs / description below
             panelDesc = new Panel
             {
                 Dock = DockStyle.Fill,
-                BackColor = Color.FromArgb(40, 40, 40),
-                Padding = new Padding(8)
+                BackColor = Color.FromArgb(32, 32, 32),
+                Padding = new Padding(6)
             };
+
             rightColumn.Controls.Add(panelDesc);
 
+
+            // header label inside DFA
+            var dfaHeader = new Label
+            {
+                Text = "DFA Visualizer (Real-time)",
+                Dock = DockStyle.Top,
+                Height = 26,
+                ForeColor = Color.FromArgb(0, 174, 239),
+                Font = new Font("Segoe UI", 10f, FontStyle.Bold)
+            };
+
+            panelDfaContainer.Controls.Add(dfaHeader);
+
+         
             var lblLogHeader = new Label
             {
                 Text = "Project Description",
@@ -429,20 +453,29 @@ KEY FEATURES
             dfa = new HouseDFA();
             dfa.StateChanged += () => { RefreshStatus(); };
 
-            // create visualizer and dock to panelDfaContainer (under the header we already added)
+            // canvas panel (sits BELOW the header)
+            var dfaCanvas = new Panel
+            {
+                Dock = DockStyle.Fill,
+                BackColor = Color.FromArgb(40, 40, 40)
+            };
+
+            panelDfaContainer.Controls.Add(dfaCanvas);
+
+            // DFA visualizer goes INSIDE the canvas
             dfaVisualizer = new DfaVisualizer(dfa)
             {
                 Dock = DockStyle.Fill,
                 BackColor = Color.FromArgb(40, 40, 40)
             };
-            // insert after header label (header already added as first control)
-            panelDfaContainer.Controls.Add(dfaVisualizer);
-            panelDfaContainer.Controls.SetChildIndex(dfaVisualizer, 0);
+
+            dfaCanvas.Controls.Add(dfaVisualizer);
 
             // initial UI sync
             RefreshStatus();
             UpdateImage();
         }
+
 
         private void StartTimer()
         {
@@ -592,149 +625,6 @@ KEY FEATURES
         //           DFA VISUALIZER CLASS
         // ======================================
         // Circle-node visualizer (curved arrows, labels, highlight)
-        private class DfaVisualizer : Panel
-        {
-            private readonly HouseDFA _dfa;
-            private readonly Font labelFont = new Font("Segoe UI", 9f, FontStyle.Bold);
-            private readonly Font arrowFont = new Font("Segoe UI", 8f, FontStyle.Regular);
-
-            // circle node positions (will be recomputed on resize)
-            private PointF pIdle, pLightOn, pLightOff, pTempAdjust, pTimerSet, pTimerRunning, pTimerExpired;
-            private float nodeRadius = 36f;
-
-            public DfaVisualizer(HouseDFA dfa)
-            {
-                _dfa = dfa ?? throw new ArgumentNullException(nameof(dfa));
-                DoubleBuffered = true;
-                _dfa.StateChanged += () => Invalidate();
-                this.Resize += (s, e) => Invalidate();
-            }
-
-            protected override void OnPaint(PaintEventArgs e)
-            {
-                base.OnPaint(e);
-                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                ComputeLayout();
-                DrawArrows(e.Graphics);
-                DrawNodes(e.Graphics);
-            }
-
-            private void ComputeLayout()
-            {
-                // compute positions in a compact layout that fits the panel
-                float w = ClientSize.Width;
-                float h = ClientSize.Height;
-
-                // center top: Idle
-                pIdle = new PointF(w * 0.5f, h * 0.12f);
-
-                // middle row: LightOn (left), TempAdjust (center), LightOff (right)
-                pLightOn = new PointF(w * 0.20f, h * 0.38f);
-                pTempAdjust = new PointF(w * 0.50f, h * 0.38f);
-                pLightOff = new PointF(w * 0.80f, h * 0.38f);
-
-                // bottom row: TimerSet (left), TimerRunning (center), TimerExpired (right)
-                pTimerSet = new PointF(w * 0.20f, h * 0.72f);
-                pTimerRunning = new PointF(w * 0.50f, h * 0.72f);
-                pTimerExpired = new PointF(w * 0.80f, h * 0.72f);
-
-                // radius adaptively
-                nodeRadius = Math.Min(48f, Math.Min(w, h) / 12f);
-            }
-
-            private void DrawNodes(Graphics g)
-            {
-                DrawCircleNode(g, pIdle, "Idle", _dfa.CurrentState == DFAState.Idle);
-                DrawCircleNode(g, pLightOn, "Light On", _dfa.CurrentState == DFAState.LightOn);
-                DrawCircleNode(g, pLightOff, "Light Off", _dfa.CurrentState == DFAState.LightOff);
-                DrawCircleNode(g, pTempAdjust, "Temp Adjust", _dfa.CurrentState == DFAState.TempAdjust);
-                DrawCircleNode(g, pTimerSet, "Timer Set", _dfa.CurrentState == DFAState.TimerSet);
-                DrawCircleNode(g, pTimerRunning, "Timer Running", _dfa.CurrentState == DFAState.TimerRunning);
-                DrawCircleNode(g, pTimerExpired, "Timer Expired", _dfa.CurrentState == DFAState.TimerExpired);
-            }
-
-            private void DrawCircleNode(Graphics g, PointF center, string text, bool active)
-            {
-                float r = nodeRadius;
-                var rect = new RectangleF(center.X - r, center.Y - r, r * 2, r * 2);
-                Color fill = active ? Color.FromArgb(255, 30, 144, 255) : Color.FromArgb(60, 60, 60);
-                using (Brush b = new SolidBrush(fill))
-                using (Pen p = new Pen(active ? Color.Cyan : Color.LightGray, active ? 2.8f : 1.6f))
-                {
-                    g.FillEllipse(b, rect);
-                    g.DrawEllipse(p, rect);
-                }
-
-                var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-                using (Brush txt = new SolidBrush(Color.White))
-                {
-                    g.DrawString(text, labelFont, txt, rect, sf);
-                }
-            }
-
-            private void DrawArrows(Graphics g)
-            {
-                // helper draws a curved arrow with a label on the curve
-                DrawCurvedArrow(g, pIdle, pLightOn, -40, "toggle");
-                DrawCurvedArrow(g, pIdle, pLightOff, -40, "toggle");
-                DrawCurvedArrow(g, pIdle, pTempAdjust, -10, "temp mode");
-                DrawCurvedArrow(g, pIdle, pTimerSet, 10, "set timer");
-
-                DrawCurvedArrow(g, pLightOn, pLightOff, 0, "toggle");
-                DrawCurvedArrow(g, pLightOff, pLightOn, 0, "toggle");
-
-                DrawCurvedArrow(g, pTempAdjust, pIdle, 60, "apply");
-
-                DrawCurvedArrow(g, pTimerSet, pTimerRunning, 18, "confirm");
-                DrawCurvedArrow(g, pTimerRunning, pTimerExpired, 18, "timeout");
-                DrawCurvedArrow(g, pTimerExpired, pIdle, 30, "reset");
-            }
-
-            private void DrawCurvedArrow(Graphics g, PointF a, PointF b, float controlYOffset, string label)
-            {
-                using (Pen pen = new Pen(Color.LightGray, 2f))
-                {
-                    pen.CustomEndCap = new AdjustableArrowCap(6, 6);
-                    // control point is between a and b, shifted by controlYOffset vertically
-                    var mid = new PointF((a.X + b.X) / 2f, (a.Y + b.Y) / 2f + controlYOffset);
-
-                    // create path and draw
-                    var path = new GraphicsPath();
-                    path.AddBezier(a, mid, mid, b);
-                    g.DrawPath(pen, path);
-
-                    // draw label at near-midpoint of path
-                    var labelPos = new PointF((a.X + b.X) / 2f, (a.Y + b.Y) / 2f + controlYOffset / 2f - 6);
-                    var txtSize = g.MeasureString(label, arrowFont);
-                    var labelRect = new RectangleF(labelPos.X - txtSize.Width / 2f - 6, labelPos.Y - txtSize.Height / 2f - 4, txtSize.Width + 12, txtSize.Height + 6);
-
-                    // draw dark pill behind label
-                    using (Brush pill = new SolidBrush(Color.FromArgb(50, 0, 0, 0)))
-                    using (Pen pillPen = new Pen(Color.FromArgb(100, 100, 100)))
-                    {
-                        var pillPath = RoundedRect(labelRect, 6);
-                        g.FillPath(pill, pillPath);
-                        g.DrawPath(pillPen, pillPath);
-                    }
-                    // draw label text
-                    using (Brush txt = new SolidBrush(Color.LightGray))
-                    {
-                        g.DrawString(label, arrowFont, txt, labelRect, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-                    }
-                }
-            }
-
-            private GraphicsPath RoundedRect(RectangleF r, float radius)
-            {
-                var path = new GraphicsPath();
-                float d = radius * 2f;
-                path.AddArc(r.X, r.Y, d, d, 180, 90);
-                path.AddArc(r.Right - d, r.Y, d, d, 270, 90);
-                path.AddArc(r.Right - d, r.Bottom - d, d, d, 0, 90);
-                path.AddArc(r.X, r.Bottom - d, d, d, 90, 90);
-                path.CloseFigure();
-                return path;
-            }
-        }
+        
     }
 }

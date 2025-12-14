@@ -17,3 +17,4 @@ C:\Users\ACER\Desktop\Github\simpleHouseAutomation\HouseAutomationDFA\obj\Debug\
 C:\Users\ACER\Desktop\Github\simpleHouseAutomation\HouseAutomationDFA\bin\Debug\HouseAutomationDFA.exe.config
 C:\Users\ACER\Desktop\Github\simpleHouseAutomation\HouseAutomationDFA\bin\Debug\HouseAutomationDFA.exe
 C:\Users\ACER\Desktop\Github\simpleHouseAutomation\HouseAutomationDFA\bin\Debug\HouseAutomationDFA.pdb
+C:\Users\ACER\Desktop\Github\simpleHouseAutomation\HouseAutomationDFA\obj\Debug\HouseAutomationDFA.exe.config

@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Resources;
 using System.Globalization;
 
-namespace HouseAutomationDFA.Properties
+namespace HouseAutomationDFA.Properties 
 {
     internal static class Resources
     {
