@@ -38,9 +38,9 @@
               "Title": "MainForm.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Github\\simpleHouseAutomation\\HouseAutomationDFA\\MainForm.cs",
               "RelativeDocumentMoniker": "HouseAutomationDFA\\MainForm.cs",
-              "ToolTip": "C:\\Users\\ACER\\Desktop\\Github\\simpleHouseAutomation\\HouseAutomationDFA\\MainForm.cs*",
-              "RelativeToolTip": "HouseAutomationDFA\\MainForm.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAPAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\Github\\simpleHouseAutomation\\HouseAutomationDFA\\MainForm.cs",
+              "RelativeToolTip": "HouseAutomationDFA\\MainForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-12T10:03:40.159Z",
               "IsPinned": true,
@@ -49,10 +49,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
               "$type": "Document",

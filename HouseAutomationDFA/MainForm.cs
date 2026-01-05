@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace HouseAutomationDFA
 {
     // DFA states
-    public enum DFAState
+    public enum DFAState 
     {
         Idle,
         LightOn,
